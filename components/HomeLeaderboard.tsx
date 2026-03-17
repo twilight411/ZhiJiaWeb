@@ -20,7 +20,8 @@ export function HomeLeaderboard() {
 
         <div className="max-w-4xl mx-auto">
           <div className="bg-[#1A1C24] border border-white/10 rounded-xl overflow-hidden">
-            <div className="grid grid-cols-4 gap-4 p-4 bg-white/5 border-b border-white/10 text-sm text-gray-400">
+            {/* 表头仅在中等以上屏幕显示，避免小屏拥挤 */}
+            <div className="hidden sm:grid grid-cols-4 gap-4 p-4 bg-white/5 border-b border-white/10 text-xs sm:text-sm text-gray-400">
               <div>排名</div>
               <div>模型</div>
               <div>评分</div>
@@ -29,7 +30,7 @@ export function HomeLeaderboard() {
             {topModels.map((model) => (
               <div
                 key={model.rank}
-                className="grid grid-cols-4 gap-4 p-4 border-b border-white/5 last:border-b-0 hover:bg-white/5 transition-colors"
+                className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 p-4 border-b border-white/5 last:border-b-0 hover:bg-white/5 transition-colors text-sm"
               >
                 <div className="flex items-center gap-3">
                   <div
@@ -46,14 +47,18 @@ export function HomeLeaderboard() {
                     {model.rank}
                   </div>
                 </div>
-                <div className="flex items-center">{model.model}</div>
                 <div className="flex items-center">
+                  <span className="sm:hidden mr-1 text-xs text-gray-500">模型</span>
+                  {model.model}
+                </div>
+                <div className="flex items-center">
+                  <span className="sm:hidden mr-1 text-xs text-gray-500">评分</span>
                   <span className="text-[#00FFA3]">{model.score}</span>
                 </div>
                 <div className="flex items-center">
                   <div className="flex items-center gap-1 text-[#00FFA3]">
                     <TrendingUp className="w-4 h-4" />
-                    <span className="text-sm">{model.trend}</span>
+                    <span className="text-xs sm:text-sm">{model.trend}</span>
                   </div>
                 </div>
               </div>
