@@ -1,9 +1,9 @@
-import { AiDynamicSection } from "@/components/AiDynamicSection";
+import { NewsListSection } from "@/components/NewsListSection";
 
 export default function NewsPage() {
   return (
-    <main className="min-h-screen pt-24 pb-20">
-      <AiDynamicSection />
+    <main className="min-h-screen">
+      <NewsListSection />
     </main>
   );
 }

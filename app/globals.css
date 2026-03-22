@@ -21,3 +21,42 @@ body {
   color: var(--foreground);
   font-family: var(--font-sans), system-ui, sans-serif;
 }
+
+/* AI动态详情正文（与 Whuaiplaygroud NewsDetail 一致） */
+.article-content h2 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  color: #fff;
+}
+
+.article-content h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+  color: #e5e7eb;
+}
+
+.article-content p {
+  margin-bottom: 1rem;
+  line-height: 1.75;
+  color: #9ca3af;
+}
+
+.article-content ul {
+  margin-bottom: 1rem;
+  padding-left: 1.5rem;
+  color: #9ca3af;
+}
+
+.article-content li {
+  margin-bottom: 0.5rem;
+  line-height: 1.75;
+}
+
+.article-content strong {
+  color: #fff;
+  font-weight: 600;
+}
