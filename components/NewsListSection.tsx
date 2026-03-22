@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import Link from "next/link";
 import { Newspaper, TrendingUp, FileText, Wrench, ThumbsUp, ExternalLink, Clock } from "lucide-react";
 import { newsListItems, type NewsListItem } from "@/lib/news-list";
+import { AiRanking } from "@/components/AiRanking";
 
 const tabs = [
   { id: "all", label: "全部" },
@@ -36,6 +37,8 @@ export function NewsListSection() {
           <h1 className="text-4xl sm:text-5xl font-bold mb-4">AI动态</h1>
           <p className="text-lg sm:text-xl text-gray-400">探索AI世界的最新动态</p>
         </div>
+
+        <AiRanking />
 
         <div className="flex gap-4 mb-8 overflow-x-auto pb-2">
           {tabs.map((tab) => (
