@@ -1,8 +1,8 @@
 import { notFound } from "next/navigation";
 import { NewsDetailView } from "@/components/NewsDetailView";
-import type { NewsDetailType } from "@/lib/news-detail";
+import type { TrendType } from "@/lib/types";
 
-const validTypes: NewsDetailType[] = ["news", "paper", "tool"];
+const validTypes: string[] = ["news", "paper", "tool", "picked"];
 
 type PageProps = {
   params: Promise<{ type: string; id: string }>;
@@ -11,18 +11,13 @@ type PageProps = {
 export default async function NewsDetailPage({ params }: PageProps) {
   const { type, id } = await params;
 
-  if (!validTypes.includes(type as NewsDetailType)) {
-    notFound();
-  }
-
-  const numericId = Number.parseInt(id, 10);
-  if (Number.isNaN(numericId) || numericId < 0) {
+  if (!validTypes.includes(type)) {
     notFound();
   }
 
   return (
     <main className="min-h-screen">
-      <NewsDetailView type={type as NewsDetailType} />
+      <NewsDetailView type={type as TrendType} id={id} />
     </main>
   );
 }

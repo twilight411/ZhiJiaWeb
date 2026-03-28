@@ -1,11 +1,43 @@
 "use client";
 
 import { Trophy } from "lucide-react";
+import { useEffect, useState } from "react";
+import { api } from "@/lib/api";
+import type { PromoBanner } from "@/lib/types";
 
 export function ActivityBanner() {
+  const [promo, setPromo] = useState<PromoBanner | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    /** 获取首页活动推广位数据 */
+    const fetchPromo = async () => {
+      try {
+        const data = await api.getPromoBanner();
+        setPromo(data);
+      } catch (error) {
+        console.error("Failed to fetch promo banner:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchPromo();
+  }, []);
+
   const handleRegister = () => {
-    window.alert("报名即将开启，请先加入社群");
+    if (promo?.link) {
+      window.open(promo.link, "_blank");
+    } else {
+      window.alert("报名即将开启，请先加入社群");
+    }
   };
+
+  if (isLoading) return null; // 或者显示骨架屏
+
+  // 如果没有推广活动，显示默认的筹备中内容（或后端返回的默认值）
+  const displayTitle = promo?.title || "WHU AI Agent 大赛（筹备中）";
+  const displaySubtitle = promo?.subtitle || "探索AI Agent的无限可能";
 
   return (
     <section className="py-20 relative">
@@ -17,8 +49,8 @@ export function ActivityBanner() {
               <span className="text-sm text-[#FFD166]">火热报名中</span>
             </div>
 
-            <h2 className="text-3xl sm:text-4xl mb-4">WHU AI Agent 大赛（筹备中）</h2>
-            <p className="text-lg sm:text-xl text-gray-300 mb-8">探索AI Agent的无限可能</p>
+            <h2 className="text-3xl sm:text-4xl mb-4">{displayTitle}</h2>
+            <p className="text-lg sm:text-xl text-gray-300 mb-8">{displaySubtitle}</p>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
               <div className="p-6 rounded-xl bg-white/5 border border-white/10">

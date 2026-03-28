@@ -1,7 +1,34 @@
+"use client";
+
 import Link from "next/link";
 import { Sparkles, Users, ChevronRight } from "lucide-react";
+import { useEffect, useState } from "react";
+import { api } from "@/lib/api";
+import type { HomeConfig } from "@/lib/types";
 
 export function HeroSection() {
+  const [config, setConfig] = useState<HomeConfig | null>(null);
+
+  useEffect(() => {
+    /** 获取首页配置 */
+    const fetchConfig = async () => {
+      try {
+        const data = await api.getHomeConfig();
+        setConfig(data);
+      } catch (error) {
+        console.error("Failed to fetch home config:", error);
+      }
+    };
+    fetchConfig();
+  }, []);
+
+  const title = config?.hero.title || "WHU AI Playground";
+  const subtitle = config?.hero.subtitle || "武汉大学AI探索入口";
+  const description = config?.hero.description || "资讯 · 技术 · 资源 · 活动";
+  const primaryText = config?.hero.primaryCta?.text || "探索AI";
+  const primaryLink = config?.hero.primaryCta?.link || "#ai-map";
+  const secondaryText = config?.hero.secondaryCta?.text || "加入社群";
+
   return (
     <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden pt-20">
       <div className="absolute inset-0">
@@ -20,19 +47,19 @@ export function HeroSection() {
 
             <h1 className="text-4xl sm:text-5xl lg:text-6xl mb-6">
               <span className="bg-gradient-to-r from-[#6C63FF] via-[#00D1FF] to-[#00FFA3] bg-clip-text text-transparent">
-                WHU AI Playground
+                {title}
               </span>
             </h1>
 
-            <p className="text-xl sm:text-2xl text-gray-300 mb-4">武汉大学AI探索入口</p>
-            <p className="text-base sm:text-lg text-gray-400 mb-8">资讯 · 技术 · 资源 · 活动</p>
+            <p className="text-xl sm:text-2xl text-gray-300 mb-4">{subtitle}</p>
+            <p className="text-base sm:text-lg text-gray-400 mb-8">{description}</p>
 
             <div className="flex flex-wrap gap-4">
               <Link
-                href="#ai-map"
+                href={primaryLink}
                 className="px-8 py-4 bg-gradient-to-r from-[#6C63FF] to-[#00D1FF] rounded-lg hover:shadow-xl hover:shadow-[#6C63FF]/50 transition-all flex items-center gap-2 group"
               >
-                <span>探索AI</span>
+                <span>{primaryText}</span>
                 <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Link>
               <button
@@ -40,7 +67,7 @@ export function HeroSection() {
                 className="px-8 py-4 border border-white/20 rounded-lg hover:bg-white/5 transition-all flex items-center gap-2"
               >
                 <Users className="w-5 h-5" />
-                <span>加入社群</span>
+                <span>{secondaryText}</span>
               </button>
             </div>
 
