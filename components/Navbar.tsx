@@ -66,13 +66,13 @@ export function Navbar() {
               <Plus className="w-4 h-4" />
               <span className="hidden sm:inline">Submit</span>
             </button>
-            <Link
-              href="/login"
-              className="px-4 py-2 sm:px-6 sm:py-2 bg-gradient-to-r from-[#6C63FF] to-[#00D1FF] rounded-lg hover:shadow-lg hover:shadow-[#6C63FF]/50 transition-all flex items-center gap-2 text-sm text-white"
+            <button
+              type="button"
+              className="px-4 py-2 sm:px-6 sm:py-2 bg-gradient-to-r from-[#6C63FF] to-[#00D1FF] rounded-lg hover:shadow-lg hover:shadow-[#6C63FF]/50 transition-all flex items-center gap-2 text-sm"
             >
               <UserCircle className="w-4 h-4" />
               <span className="hidden sm:inline">Login</span>
-            </Link>
+            </button>
           </div>
 
           {/* 移动端菜单按钮 */}
@@ -111,14 +111,13 @@ export function Navbar() {
                 <Plus className="w-4 h-4" />
                 <span>Submit</span>
               </button>
-              <Link
-                href="/login"
-                onClick={handleNavClick}
-                className="w-full px-3 py-2 bg-gradient-to-r from-[#6C63FF] to-[#00D1FF] rounded-lg hover:shadow-lg hover:shadow-[#6C63FF]/50 transition-all flex items-center justify-center gap-2 text-sm text-white"
+              <button
+                type="button"
+                className="w-full px-3 py-2 bg-gradient-to-r from-[#6C63FF] to-[#00D1FF] rounded-lg hover:shadow-lg hover:shadow-[#6C63FF]/50 transition-all flex items-center justify-center gap-2 text-sm"
               >
                 <UserCircle className="w-4 h-4" />
                 <span>Login</span>
-              </Link>
+              </button>
             </div>
           </div>
         )}
